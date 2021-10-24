@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class CBController {
-    private static final String CB_TEST = "cbTest";
+    private static final String BACKEND_A = "backendA";
     @Autowired
     RestTemplate restTemplate;
 
@@ -19,7 +19,7 @@ public class CBController {
     RestTemplate getRestTemplate() {return new RestTemplate();}
 
     @GetMapping("/test")
-    @CircuitBreaker(name = CB_TEST, fallbackMethod = "testFallback")
+    @CircuitBreaker(name = BACKEND_A, fallbackMethod = "testFallback")
     public ResponseEntity<String> test() {
         System.out.println("Call......." + System.currentTimeMillis());
         String response = restTemplate.getForObject("http://localhost:8080/api/v1/remote", String.class);
